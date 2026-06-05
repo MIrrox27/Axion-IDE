@@ -1,9 +1,69 @@
+// author https://github.com/MIrrox27/Axion-IDE
+// main.ax
+
 import gui
 
-fun callback(){
+    // Создаем функции, которые будут выполняться при нажатии на кнопки
+
+fun callback(){ // тестовая функция
     print('Кнопка нажата')
 }
 
+fun save_code(){}
+fun open_code(){}
 
-var root = gui.create_window('Axion IDE', 800, 600, '#282829');
+
+
+    // Переменные для хранения внутренних данных
+
+var path_to_file;
+
+
+
+    //  Создаем элементы
+
+var bg_color = '#282829'
+var root = gui.create_window('Axion IDE', 800, 600, bg_color);
+var text_frame = gui.create_text(
+                root,
+                600, 500,
+                '#353535', '#ffffff',
+                30, 30,
+                ['Arial', 18]
+)
+var mainframe = gui.create_frame(root, bg_color)
+
+
+fun open_path_win(){
+    var path_win = gui.create_second_window(root, 'Путь к файлу', 500, 90, bg_color)
+    var input_path = gui.create_text(
+                    path_win,
+                    400, 50,
+                    '#353535', '#ffffff',
+                    30, 30,
+                    ['Arial', 18]
+    )
+    var open_file_btn = gui.create_button(path_win, 'Открыть', len("Открыть"), 1, open_code, 'Arial', 12)
+
+    gui.pack(open_file_btn, False, 'w', 'right', 5, 5)
+    gui.pack(input_path, False, 'n', 'left', 5, 5)
+}
+
+
+var btn  = gui.create_button(mainframe, "Открыть",   len("Открыть"), 1, open_path_win, 'Arial', 12);
+var btn2 = gui.create_button(mainframe, "Сохранить", len("Сохранить"), 1, callback, 'Arial', 12);
+var btn3 = gui.create_button(mainframe, "Запустить", len("Запустить"), 1, callback, 'Arial', 12);
+
+
+
+    // Регистрация
+gui.pack(mainframe, False, 'sw', 'top', 10, 10)
+
+gui.pack(btn,  False, 'n', 'left', 5, 5);
+gui.pack(btn2, False, 'n', 'left', 5, 5);
+gui.pack(btn3, False, 'n', 'left', 5, 5);
+
+gui.pack(text_frame, True, 'w', 'bottom', 10, 0)
+
+
 gui.mainloop(root)
