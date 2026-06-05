@@ -2,6 +2,15 @@
 // main.ax
 
 import gui
+import os
+
+
+
+    // Переменные для хранения внутренних данных
+
+var path_to_file;
+var widget;
+var code_in_file;
 
     // Создаем функции, которые будут выполняться при нажатии на кнопки
 
@@ -10,13 +19,16 @@ fun callback(){ // тестовая функция
 }
 
 fun save_code(){}
-fun open_code(){}
 
+fun open_code(){
+    path_to_file = gui.get_text(widget);
+    print("Добавлен файл:", path_to_file);
 
+    var code = os.read_file(path_to_file)
+    gui.update_text(text_frame, code)
 
-    // Переменные для хранения внутренних данных
-
-var path_to_file;
+    return code;
+}
 
 
 
@@ -44,9 +56,11 @@ fun open_path_win(){
                     ['Arial', 18]
     )
     var open_file_btn = gui.create_button(path_win, 'Открыть', len("Открыть"), 1, open_code, 'Arial', 12)
-
+    widget = input_path
+    print(widget)
     gui.pack(open_file_btn, False, 'w', 'right', 5, 5)
     gui.pack(input_path, False, 'n', 'left', 5, 5)
+
 }
 
 
@@ -67,3 +81,4 @@ gui.pack(text_frame, True, 'w', 'bottom', 10, 0)
 
 
 gui.mainloop(root)
+
