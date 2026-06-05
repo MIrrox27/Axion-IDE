@@ -1,0 +1,9 @@
+import gui
+
+fun callback(){
+    print('Кнопка нажата')
+}
+
+
+var root = gui.create_window('Axion IDE', 800, 600, '#282829');
+gui.mainloop(root)
