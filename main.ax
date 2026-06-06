@@ -18,7 +18,12 @@ fun callback(){ // тестовая функция
     print('Кнопка нажата')
 }
 
-fun save_code(){}
+fun save_code(){
+    code_in_file = gui.get_text(text_frame)
+    os.write_file(path_to_file, 'w', code_in_file)
+
+    print("Файл", path_to_file, "успешно сохранен")
+}
 
 fun open_code(){
     path_to_file = gui.get_text(widget);
@@ -26,7 +31,6 @@ fun open_code(){
 
     var code = os.read_file(path_to_file)
     gui.update_text(text_frame, code)
-
     return code;
 }
 
@@ -57,7 +61,7 @@ fun open_path_win(){
     )
     var open_file_btn = gui.create_button(path_win, 'Открыть', len("Открыть"), 1, open_code, 'Arial', 12)
     widget = input_path
-    print(widget)
+    //print(widget)
     gui.pack(open_file_btn, False, 'w', 'right', 5, 5)
     gui.pack(input_path, False, 'n', 'left', 5, 5)
 
@@ -65,7 +69,7 @@ fun open_path_win(){
 
 
 var btn  = gui.create_button(mainframe, "Открыть",   len("Открыть"), 1, open_path_win, 'Arial', 12);
-var btn2 = gui.create_button(mainframe, "Сохранить", len("Сохранить"), 1, callback, 'Arial', 12);
+var btn2 = gui.create_button(mainframe, "Сохранить", len("Сохранить"), 1, save_code, 'Arial', 12);
 var btn3 = gui.create_button(mainframe, "Запустить", len("Запустить"), 1, callback, 'Arial', 12);
 
 
