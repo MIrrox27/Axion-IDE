@@ -22,16 +22,25 @@ fun save_code(){
     code_in_file = gui.get_text(text_frame)
     os.write_file(path_to_file, 'w', code_in_file)
 
-    print("Файл", path_to_file, "успешно сохранен")
+    var msg = "Файл " + path_to_file + " успешно сохранен!"
+    print(msg)
+    gui.show_message('info', msg)
 }
 
 fun open_code(){
-    path_to_file = gui.get_text(widget);
-    print("Добавлен файл:", path_to_file);
+    path_to_file = gui.get_text(widget) // C:\Users\Пользователь\PycharmProjects\Axion\test.txt
+    val msg = "Добавлен файл: " + path_to_file
+    print(msg)
+    gui.show_message('info', msg)
 
     var code = os.read_file(path_to_file)
     gui.update_text(text_frame, code)
     return code;
+}
+
+fun start_code(){
+    var command = 'axion ' + path_to_file
+    os.cmd_command(command)
 }
 
 
@@ -51,12 +60,12 @@ var mainframe = gui.create_frame(root, bg_color)
 
 
 fun open_path_win(){
-    var path_win = gui.create_second_window(root, 'Путь к файлу', 500, 90, bg_color)
+    var path_win = gui.create_second_window(root, 'Путь к файлу', 700, 100, bg_color)
     var input_path = gui.create_text(
                     path_win,
-                    400, 50,
+                    400, 100,
                     '#353535', '#ffffff',
-                    30, 30,
+                    20, 10,
                     ['Arial', 18]
     )
     var open_file_btn = gui.create_button(path_win, 'Открыть', len("Открыть"), 1, open_code, 'Arial', 12)
@@ -70,7 +79,7 @@ fun open_path_win(){
 
 var btn  = gui.create_button(mainframe, "Открыть",   len("Открыть"), 1, open_path_win, 'Arial', 12);
 var btn2 = gui.create_button(mainframe, "Сохранить", len("Сохранить"), 1, save_code, 'Arial', 12);
-var btn3 = gui.create_button(mainframe, "Запустить", len("Запустить"), 1, callback, 'Arial', 12);
+var btn3 = gui.create_button(mainframe, "Запустить", len("Запустить"), 1, start_code, 'Arial', 12);
 
 
 
