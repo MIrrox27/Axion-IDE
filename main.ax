@@ -28,7 +28,7 @@ fun save_code(){
 }
 
 fun open_code(){
-    path_to_file = gui.get_text(widget) // C:\Users\Пользователь\PycharmProjects\Axion\test.ax
+    path_to_file = gui.get_text(widget)
     val msg = "Добавлен файл: " + path_to_file
     print(msg)
     gui.show_message('info', msg)
